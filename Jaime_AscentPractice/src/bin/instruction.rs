@@ -1,24 +1,18 @@
 use ascent::ascent;
+use ascent::Dual;
 
-// given a sequence of instructions, determine if the sequence is possible to execute based on the rules
+// based on a given sequence of instructions, determine if the sequence is valid
 
 ascent! {
-    // instructions
+    // Define instruction relations
     relation mov(&'static str, &'static str); 
     relation je(i32, &'static str); // if result of prior arithmetic operation is equal to zero, jump to address
     relation add(&'static str, &'static str);
     relation sub(&'static str, &'static str);
-
-    // rules
-    je(result, addr) <-- sub(r1, r2);
-    mov(r2, r3) <-- add(r1, r2);
+    lattice valid_sequence(,,Dual<>);
 }
 
 fn main() {
     let mut prog: AscentProgram = AscentProgram::default();
-
-    prog.
-    
     prog.run();
-
 }
